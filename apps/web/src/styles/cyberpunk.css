@@ -1,0 +1,328 @@
+/* ================================================================
+   CYBERPUNK 2077 UI — Game Aesthetic
+   ================================================================ */
+
+/* --- 1. Custom Properties (Design Tokens) --- */
+:root {
+  --cp-yellow: #fcee0a; /* Signature Cyberpunk Yellow (used sparingly in menus) */
+  --cp-cyan: #00f0ff; /* Hologram blue (Active/Highlight color) */
+  --cp-red: #ff2a4b; /* Vibrant pinkish-red (Primary Text & Borders in menus) */
+  --cp-red-dark: #8c0c1b;
+  --cp-pink: #f222ff; /* Keep for rare neon accents */
+  
+  --cp-bg: #070a13; /* Very dark navy/black base for the gradient */
+  --cp-surface: rgba(43, 11, 20, 0.7); /* Translucent dark red for panels */
+  --cp-surface-light: rgba(69, 17, 33, 0.8);
+  
+  --cp-text-primary: var(--cp-red); /* ALL standard text is RED */
+  --cp-text-dark: #000000;
+  --cp-text-muted: #b3324d; /* Muted red */
+}
+
+/* --- 2. Global Resets & Fonts --- */
+.dark-theme-override {
+  background-color: var(--cp-bg);
+  color: var(--cp-text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Share Tech Mono', monospace;
+  background-image: 
+    /* Subtle radial red glow from edges towards center */
+    radial-gradient(ellipse at center, transparent 40%, rgba(140, 12, 27, 0.6) 100%),
+    /* Horizontal scanlines / grid */
+    linear-gradient(90deg, rgba(255, 42, 75, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 42, 75, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 20px 20px, 20px 20px;
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: 'Rajdhani', sans-serif;
+  text-transform: uppercase;
+  color: var(--cp-red);
+}
+
+/* --- 3. Chromatic Aberration & Text Effects --- */
+.cp-glitch {
+  position: relative;
+  display: inline-block;
+  color: var(--cp-red);
+}
+
+.cp-glitch::before,
+.cp-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.cp-glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--cp-pink);
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.cp-glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--cp-cyan);
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(25px, 9999px, 86px, 0); transform: skew(0.5deg); }
+  5% { clip: rect(69px, 9999px, 6px, 0); transform: skew(0.1deg); }
+  10% { clip: rect(4px, 9999px, 57px, 0); transform: skew(0.7deg); }
+  15% { clip: rect(10px, 9999px, 21px, 0); transform: skew(0.2deg); }
+  20% { clip: rect(65px, 9999px, 98px, 0); transform: skew(0.4deg); }
+  25% { clip: rect(43px, 9999px, 34px, 0); transform: skew(0.8deg); }
+  100% { clip: rect(80px, 9999px, 5px, 0); transform: skew(0deg); }
+}
+
+/* Static Chromatic Aberration Text */
+.text-chromatic {
+  text-shadow: 2px 0px 0px var(--cp-cyan), -2px 0px 0px var(--cp-pink);
+}
+
+/* --- 4. Cyber Surfaces & Patterns --- */
+/* Diagonal warning stripes pattern */
+.stripes-bg {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(252, 238, 10, 0.1),
+    rgba(252, 238, 10, 0.1) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+.stripes-bg-pink {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(242, 34, 255, 0.1),
+    rgba(242, 34, 255, 0.1) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* Heavy cut corners for cards */
+.cp-card {
+  background-color: var(--cp-surface);
+  position: relative;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
+  border-left: 3px solid var(--cp-cyan);
+  transition: all 0.3s ease;
+}
+
+.cp-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    var(--cp-cyan) 5px,
+    var(--cp-cyan) 6px
+  );
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  opacity: 0.3;
+}
+
+.cp-card:hover {
+  background-color: var(--cp-surface-light);
+  border-left-color: var(--cp-yellow);
+}
+
+.cp-card:hover::after {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    var(--cp-yellow) 5px,
+    var(--cp-yellow) 6px
+  );
+  opacity: 0.8;
+}
+
+/* --- 5. Navigation (HUD) --- */
+.cp-nav {
+  background-color: var(--cp-bg);
+  border-bottom: 2px solid var(--cp-red);
+  position: relative;
+}
+
+.cp-nav::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: 10%;
+  width: 20%;
+  height: 2px;
+  background-color: var(--cp-cyan);
+}
+
+.cp-nav-link {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--cp-text-muted);
+  position: relative;
+  padding: 0.5rem 1rem;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.cp-nav-link:hover, .cp-nav-link.active {
+  color: var(--cp-text-dark);
+  background-color: var(--cp-yellow);
+}
+
+/* --- 6. Buttons --- */
+.cp-btn-primary {
+  background-color: var(--cp-yellow);
+  color: var(--cp-text-dark);
+  font-family: 'Rajdhani', sans-serif;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--cp-cyan);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border: 1px solid var(--cp-cyan);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+.cp-btn-primary:hover {
+  background: var(--cp-cyan);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0,240,255,0.5);
+}
+
+.cp-btn-danger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--cp-red);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border: 1px solid var(--cp-red);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+.cp-btn-danger:hover {
+  background: var(--cp-red);
+  color: #000;
+  box-shadow: 0 0 10px rgba(255,42,75,0.5);
+}
+
+/* --- 6. Cyber Cards --- */
+.cp-card {
+  position: relative;
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-red-dark);
+  color: var(--cp-red);
+  transition: all 0.2s ease;
+}
+
+/* Cut corners for card inner */
+.cp-card-inner {
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+  background: var(--cp-surface);
+  height: 100%;
+  width: 100%;
+}
+
+.cp-card:hover {
+  border-color: var(--cp-cyan);
+}
+
+/* Input Fields */
+.cp-input {
+  width: 100%;
+  background: var(--cp-bg);
+  border: 1px solid var(--cp-red-dark);
+  color: var(--cp-cyan);
+  padding: 12px 16px;
+  font-family: 'Share Tech Mono', monospace;
+  transition: all 0.2s ease;
+}
+
+.cp-input:focus {
+  outline: none;
+  border-color: var(--cp-cyan);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.cp-input::placeholder {
+  color: var(--cp-text-muted);
+}
+
+/* --- 8. HUD Crosshairs (Backgrounds) --- */
+.hud-crosshair {
+  position: relative;
+}
+.hud-crosshair::before, .hud-crosshair::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--cp-cyan);
+  opacity: 0.5;
+}
+.hud-crosshair::before {
+  top: 0; left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+.hud-crosshair::after {
+  bottom: 0; right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Scrollbar */
+.dark-theme-override::-webkit-scrollbar {
+  width: 6px;
+}
+.dark-theme-override::-webkit-scrollbar-track {
+  background: var(--cp-bg);
+}
+.dark-theme-override::-webkit-scrollbar-thumb {
+  background: var(--cp-red);
+}
+.dark-theme-override::-webkit-scrollbar-thumb:hover {
+  background: var(--cp-yellow);
+}
