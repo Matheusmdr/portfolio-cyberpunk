@@ -40,6 +40,7 @@
     "db:generate": "bun run --filter @portfolio/db db:generate",
     "db:migrate": "bun run --filter @portfolio/db db:migrate",
     "db:local": "bun run --filter @portfolio/db db:local",
+    "db:seed": "bun run --filter @portfolio/db db:seed",
     "prepare": "husky"
   },
   "dependencies": {

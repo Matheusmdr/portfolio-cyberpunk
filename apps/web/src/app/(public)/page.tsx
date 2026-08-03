@@ -82,7 +82,7 @@ export default function Home() {
         {/* Stats bar */}
         <div className="cp-hero-elem mt-24 grid grid-cols-2 gap-4 md:grid-cols-4 pt-8 border-t-2 border-[var(--cp-red)]">
           {[
-            { value: "03", label: "ANOS DE EXP", suffix: "++" },
+            { value: "05", label: "ANOS DE EXP", suffix: "+" },
             { value: "04", label: "EMPRESAS", suffix: "" },
             { value: "100", label: "REMOTO", suffix: "%" },
             { value: "OK", label: "SISTEMA", suffix: "" },
