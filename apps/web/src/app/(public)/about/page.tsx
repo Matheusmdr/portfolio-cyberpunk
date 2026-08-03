@@ -81,7 +81,7 @@ export default function About() {
             </h3>
             <div className="font-mono text-sm leading-relaxed text-[var(--cp-text-primary)] space-y-4">
               <p>
-                Engenheiro de Software Fullstack com sólida experiência na arquitetura e liderança técnica de aplicações web escaláveis. Especialista no ecossistema JavaScript/TypeScript (Next.js, React, Node.js), com experiência prática no desenvolvimento de produtos SaaS e plataformas multi-tenant.
+                Engenheiro de Software Fullstack com sólida experiência na arquitetura e liderança técnica de aplicações web escaláveis. Especialista no ecossistema JavaScript/TypeScript (Next.js, React, Node.js), com experiência prática no desenvolvimento de produtos SaaS de Inteligência Artificial e plataformas multi-tenant.
               </p>
               <p>
                 Atuo unindo o domínio em desenvolvimento front-end à construção de back-ends robustos (Node.js, Python/FastAPI) e bancos de dados eficientes, priorizando código limpo, otimização técnica (Core Web Vitals) e soluções inteligentes para o negócio.
@@ -105,7 +105,7 @@ export default function About() {
               <div className="flex-1" />
               <span className="font-mono text-[10px] text-[var(--cp-cyan)] border border-[var(--cp-cyan)] px-1">CYBERWARE</span>
             </div>
-            
+
             <div className="grid grid-cols-1 gap-1">
               {[
                 { name: "FRONTEND", type: "React.js, Next.js, Vue 3, React Native, Tailwind, TypeScript" },
